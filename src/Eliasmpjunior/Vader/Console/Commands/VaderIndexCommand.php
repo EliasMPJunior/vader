@@ -8,6 +8,7 @@ use Web64\Colors\Facades\Colors;
 use Illuminate\Database\QueryException;
 
 use Eliasmpjunior\Vader\Exceptions\ModelNotFoundException;
+use Eliasmpjunior\Vader\Services\DeclaredClasses;
 
 
 class VaderIndexCommand extends Command
@@ -46,13 +47,12 @@ class VaderIndexCommand extends Command
     {
         $modelName = Str::studly(Str::singular($this->argument('model_name')));
 
-        $declaredClasses = collect(get_declared_classes())
-                                ->filter(function ($item) {
-                                    return Str::contains($item, 'Eliasmpjunior');
-                                    return Str::contains($item, '\\Models\\');
+        $declaredClasses = DeclaredClasses::models()
+                                ->filter(function ($item) use ($modelName) {
+                                    return $item['name'] === $modelName;
                                 })
                                 ->keyBy(function ($item) {
-                                    return Str::afterLast($item, '\\');
+                                    return $item['classPath'];
                                 })
                                 ->all();
 
@@ -65,7 +65,9 @@ class VaderIndexCommand extends Command
             // code...
         }
 
-        dd($declaredClasses);
+        $modelList = ((reset($declaredClasses))['classObject'])->all();
+
+        dd($modelList);
 
         return 0;
     }
