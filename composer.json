@@ -1,0 +1,27 @@
+{
+    "name": "eliasmpjunior/vader",
+    "description": "An easy way to deal with a CRUD on CLI.",
+    "authors": [
+        {
+            "name": "eliasmpjunior",
+            "email": "elias@brasidata.com.br",
+            "homepage": "https://brasidata.com.br"
+        }
+    ],
+    "license": "MIT",
+    "autoload": {
+        "psr-0": {
+            "Eliasmpjunior\\Vader": "src"
+        }
+    },
+    "require": {
+        "php": "^7.3 || ^8.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Eliasmpjunior\\Vader\\Providers\\VaderServiceProvider"
+            ]
+        }
+    }
+}
