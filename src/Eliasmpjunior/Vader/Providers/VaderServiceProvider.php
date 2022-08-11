@@ -8,6 +8,7 @@ use Illuminate\Support\ServiceProvider;
 
 use Eliasmpjunior\Vader\Console\Commands\VaderInfoCommand;
 use Eliasmpjunior\Vader\Console\Commands\VaderIndexCommand;
+use Eliasmpjunior\Vader\Console\Commands\VaderStoreCommand;
 
 
 class VaderServiceProvider extends ServiceProvider
@@ -33,6 +34,7 @@ class VaderServiceProvider extends ServiceProvider
             $this->commands([
                 VaderInfoCommand::class,
                 VaderIndexCommand::class,
+                VaderStoreCommand::class,
             ]);
         }
 

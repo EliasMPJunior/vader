@@ -59,13 +59,25 @@ class VaderIndexCommand extends Command
         if (count($declaredClasses) < 1)
         {
             (new ModelNotFoundException($modelName))->printException();
+
+            return 1;
         }
         elseif (count($declaredClasses) > 1)
         {
             // code...
         }
 
-        $modelList = ((reset($declaredClasses))['classObject'])->all();
+        $classObject = ((reset($declaredClasses))['classObject']);
+        $modelList = $classObject->all();
+
+        if (count($modelList) === 0)
+        {
+            Colors::line('');
+            Colors::light_yellow('The '.$modelName.'\'s model table is empty.');
+            Colors::line('');
+
+            return 0;
+        }
 
         dd($modelList);
 
